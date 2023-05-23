@@ -4,7 +4,6 @@ public class Musica {
 	String titulo;
 	String artista;
 	int duracao;
-	String ano;
 	
     public Musica(String titulo, String artista, int duracao) {
         this.titulo = titulo;
@@ -39,16 +38,6 @@ public class Musica {
 
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
-	}
-
-
-	public String getAno() {
-		return ano;
-	}
-
-
-	public void setAno(String ano) {
-		this.ano = ano;
 	}
 
 

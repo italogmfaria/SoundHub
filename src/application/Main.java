@@ -4,60 +4,72 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Playlist playlist = new Playlist();
-        Scanner scanner = new Scanner(System.in);
+    	 Playlist playlist = new Playlist();
+         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Quantas musicas voce deseja adicionar a playlist? ");
-        int quantidadeMusicas = scanner.nextInt();
-        scanner.nextLine(); // Consumir a quebra de linha apos a leitura do numero
+         System.out.print("Quantas musicas voce deseja adicionar a playlist? ");
+         int quantidadeMusicas = scanner.nextInt();
+         scanner.nextLine(); // Consumir a quebra de linha apos a leitura do numero
 
-        for (int i = 0; i < quantidadeMusicas; i++) {
-            System.out.println("Musica #" + (i + 1));
-            System.out.print("Titulo: ");
-            String titulo = scanner.nextLine();
-            System.out.print("Artista: ");
-            String artista = scanner.nextLine();
-            System.out.print("Duracao (em minutos): ");
-            int duracao = scanner.nextInt();
-            scanner.nextLine(); // Consumir a quebra de linha apos a leitura do numero
+         for (int i = 0; i < quantidadeMusicas; i++) {
+             System.out.println("Musica #" + (i + 1));
+             System.out.print("Titulo: ");
+             String titulo = scanner.nextLine();
+             System.out.print("Artista: ");
+             String artista = scanner.nextLine();
+             System.out.print("Duracao (em minutos): ");
+             int duracao = scanner.nextInt();
+             scanner.nextLine(); // Consumir a quebra de linha apos a leitura do numero
 
-            Musica musica = new Musica(titulo, artista, duracao);
-            playlist.adicionarMusica(musica);
-        }
+             Musica musica = new Musica(titulo, artista, duracao);
+             playlist.adicionarMusica(musica);
+         }
 
-        System.out.println();
-        playlist.exibirMusicas();
+         System.out.println();
+         playlist.getMusicas();
 
-        System.out.print("\nDigite o numero correspondente a opcao de ordenacao: " +
-                "\n1 - Ordenar por titulo" +
-                "\n2 - Ordenar por artista" +
-                "\n3 - Ordenar por duracao" +
-                "\n0 - Sair" +
-                "\nOpcao: ");
-        int opcao = scanner.nextInt();
+         int opcao = -1;
+         while (opcao != 0) {
+             System.out.println("\nOpcões de Ordenacao:" +
+                     "\n1 - Ordenar por titulo" +
+                     "\n2 - Ordenar por artista" +
+                     "\n3 - Ordenar por duracao" +
+                     "\n4 - Remover musica" +
+                     "\n0 - Sair");
+             System.out.print("Digite o numero correspondente a opcao desejada: ");
+             opcao = scanner.nextInt();
+             scanner.nextLine(); // Consumir a quebra de linha apos a leitura do numero
 
-        while (opcao != 0) {
-            switch (opcao) {
-                case 1:
-                    playlist.ordenarPorTitulo();
-                    break;
-                case 2:
-                    playlist.ordenarPorArtista();
-                    break;
-                case 3:
-                    playlist.ordenarPorDuracao();
-                    break;
-                default:
-                    System.out.println("Opcao invalida.");
-            }
+             switch (opcao) {
+                 case 1:
+                     playlist.ordenar(Comparator.comparing(Musica::getTitulo));
+                     System.out.println("\nPlaylist ordenada por titulo:");
+                     playlist.getMusicas();
+                     break;
+                 case 2:
+                     playlist.ordenar(Comparator.comparing(Musica::getArtista));
+                     System.out.println("\nPlaylist ordenada por artista:");
+                     playlist.getMusicas();
+                     break;
+                 case 3:
+                     playlist.ordenar(Comparator.comparingInt(Musica::getDuracao));
+                     System.out.println("\nPlaylist ordenada por duracao:");
+                     playlist.getMusicas();
+                     break;
+                 case 4:
+                     System.out.print("\nDigite o numero correspondente a musica que deseja remover: ");
+                     int numeroMusica = scanner.nextInt();
+                     scanner.nextLine(); // Consumir a quebra de linha apos a leitura do numero
 
-            System.out.println();
-            playlist.exibirMusicas();
-
-            System.out.print("\nDigite o numero correspondente a opcao de ordenacao (ou 0 para sair): ");
-            opcao = scanner.nextInt();
-        }
-
-        System.out.println("Programa encerrado.");
-    }
-}
+                     playlist.removerMusica(numeroMusica - 1);
+                     playlist.getMusicas();
+                     break;
+                 case 0:
+                     System.out.println("\nPrograma encerrado.");
+                     break;
+                 default:
+                     System.out.println("\nOpcao invalida.");
+             }
+         }
+     }
+ }

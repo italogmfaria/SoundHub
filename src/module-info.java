@@ -6,4 +6,5 @@
  *
  */
 module SoundHub {
+	requires java.desktop;
 }
