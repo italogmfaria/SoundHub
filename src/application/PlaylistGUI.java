@@ -5,12 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
 
 public class PlaylistGUI extends JFrame {
-	  private Playlist playlist;
+	  /**
+	 * itinho and brenis
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Playlist playlist;
 	    private DefaultListModel<Musica> listModel;
 	    private JList<Musica> listaMusicas;
 
